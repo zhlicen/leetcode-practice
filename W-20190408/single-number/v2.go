@@ -1,6 +1,6 @@
 package leetcode
 
-func singleNumber(nums []int) int {
+func singleNumber_v2(nums []int) int {
 	l := len(nums)
 	f := make([]bool, l)
 	for i, n := range nums {
