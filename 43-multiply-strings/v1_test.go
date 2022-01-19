@@ -1,0 +1,11 @@
+package leetcode
+
+import (
+	"fmt"
+	"testing"
+)
+
+func Test_multiply(t *testing.T) {
+	fmt.Println(multiply("60974249908865105026646412538664653190280198809433017",
+		"500238825698990292381312765074025160144624723742"))
+}
