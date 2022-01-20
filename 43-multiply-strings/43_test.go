@@ -11,4 +11,5 @@ func Test_multiply(t *testing.T) {
 		"500238825698990292381312765074025160144624723742"))
 	// 121932631112635269
 	fmt.Println(multiply("123456789", "987654321"))
+	fmt.Println(multiply("74", "48213"))
 }
