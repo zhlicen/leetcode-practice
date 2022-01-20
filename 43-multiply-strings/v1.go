@@ -26,12 +26,14 @@ func multiply(num1 string, num2 string) string {
 	}
 	var mulIdx byte = 0
 	last := false
-	var result []byte = make([]byte, 0)
+	// 最大长度为l1+l2
+	maxResultLen := l1 + l2
+	var result []byte = make([]byte, maxResultLen, maxResultLen)
 	// 进位
 	var moreAdd int = 0
 	// 单次求和
 	var singleSum int = 0
-	for !last {
+	for !last && maxResultLen > 0 {
 		// 默认为最后一位
 		last = true
 		for _, mul := range muls {
@@ -51,7 +53,6 @@ func multiply(num1 string, num2 string) string {
 						singleSum += int(mul[1] / 10)
 					}
 				}
-
 			}
 		}
 		// 加进位
@@ -59,22 +60,19 @@ func multiply(num1 string, num2 string) string {
 		// 取新进位
 		moreAdd = int(singleSum / 10)
 		// 推入结果
-		result = append(result, byte(singleSum%10))
+		result[maxResultLen-1] = byte(singleSum%10) + '0'
+		maxResultLen--
 		singleSum = 0
 		mulIdx++
 	}
-
-	reverseResult := make([]byte, 0, len(result))
-	head := true
-	// reverse
-	for i := len(result) - 1; i >= 0; i-- {
-		// trim 0
-		if result[i] != 0 {
-			head = false
-		}
-		if !head {
-			reverseResult = append(reverseResult, result[i]+'0')
+	// trim left 0
+	maxResultLen = len(result)
+	for i := 0; i < maxResultLen; i++ {
+		if result[i] != '0' && result[i] != 0 {
+			result = result[i:]
+			break
 		}
 	}
-	return string(reverseResult)
+
+	return string(result)
 }
